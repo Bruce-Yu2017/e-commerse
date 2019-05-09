@@ -1,0 +1,8 @@
+.userForm {
+    max-width: 40vw;
+    margin: 0 auto;
+}
+
+.errMsg {
+    color: red;
+}
