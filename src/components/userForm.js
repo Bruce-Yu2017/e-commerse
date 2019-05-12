@@ -113,7 +113,7 @@ const UserForm = props => {
               Submit
             </Button>}
           </Form>
-          {!props.userState.isValid && props.userState.msg && <small className='errMsg'>*{props.userState.msg}</small>}
+          {!props.isValid && props.msg && <small className='errMsg'>*{props.msg}</small>}
           
         </Tab>
         <Tab eventKey="register" title="Register" className='mt-4'>
@@ -140,7 +140,7 @@ const UserForm = props => {
               Submit
             </Button>}
           </Form>
-          {!props.userState.isValid && props.userState.msg && <small className='errMsg'>*{props.userState.msg}</small>}
+          {!props.isValid && props.msg && <small className='errMsg'>*{props.msg}</small>}
         </Tab>
       </Tabs>
     </div>
@@ -148,7 +148,7 @@ const UserForm = props => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.useState;
 }
 
 export default connect(mapStateToProps, {register, initUserState, login})(UserForm);

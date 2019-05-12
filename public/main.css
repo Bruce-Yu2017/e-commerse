@@ -6,3 +6,13 @@
 .errMsg {
     color: red;
 }
+
+
+.addShadow {
+    transition: box-shadow .5s;
+}
+
+.addShadow:hover {
+    box-shadow: 1px 1px 14px 0px #888888;
+}
+

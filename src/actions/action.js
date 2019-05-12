@@ -1,4 +1,4 @@
-import { REGISTER, CHECK_VALID_USER, INIT_USER_STATE, LOGIN } from "./types";
+import { REGISTER, CHECK_VALID_USER, INIT_USER_STATE, LOGIN, GET_ALL_PRODUCTS } from "./types";
 import history from '../history';
 import axios from "axios";
 
@@ -38,7 +38,8 @@ export const login = data => dispatch => {
           type: "login"
         }
       });
-      console.log(history)
+      localStorage.setItem("user", JSON.stringify(foundUser));
+      history.push(`/${foundUser.id}/productlist`);
     }
   })
 }
@@ -73,6 +74,8 @@ export const register = data => dispatch => {
             type: "register"
           }
         });
+        localStorage.setItem("user", JSON.stringify(res.data));
+        history.push(`/${res.data.id}/productlist`);
       });
     }
   });
@@ -88,4 +91,14 @@ export const initUserState = () => {
       type: ""
     }
   }
+}
+
+export const getAllProducts = () => dispatch => {
+  axios.get("http://localhost:3004/products").then((res) => {
+    console.log(res.data);
+    dispatch({
+      type: GET_ALL_PRODUCTS,
+      payload: res.data
+    })
+  })
 }
