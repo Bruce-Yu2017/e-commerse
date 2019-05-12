@@ -1,4 +1,5 @@
 import { REGISTER, CHECK_VALID_USER, INIT_USER_STATE, LOGIN } from "./types";
+import history from '../history';
 import axios from "axios";
 
 export const login = data => dispatch => {
@@ -36,7 +37,8 @@ export const login = data => dispatch => {
           userData: foundUser,
           type: "login"
         }
-      })
+      });
+      console.log(history)
     }
   })
 }

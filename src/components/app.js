@@ -1,15 +1,21 @@
-import React from 'react'
-import NavBar from './navbar';
-import UserForm from './userForm';
+import React from "react";
+import { Route, Router } from "react-router-dom";
+import { Switch } from "react-router";
+import history from "../history";
+import NavBar from "./navbar";
+import UserForm from "./userForm";
 
-
-const App = (props) => {
-    return (
-        <div className='container'>
-            <NavBar />
-            <UserForm />
-        </div>
-    )
-}
+const App = props => {
+  return (
+    <div className="container">
+      <Router history={history}>
+        <NavBar />
+        <Switch>
+          <Route path="/" exact component={UserForm} />
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
 export default App;

@@ -31,7 +31,6 @@ const UserForm = props => {
     }
     else {
       let temp = {...logInInputStatus};
-      console.log('temp: ', temp);
       if(type === "email") {
         setlogInInputStatus({...temp, emailTouched: true});
       }
