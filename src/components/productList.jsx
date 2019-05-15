@@ -5,7 +5,6 @@ import ProductItem from './productItem';
 
 const ProductList = (props) => {
     useEffect(() => {
-        console.log(props)
         getProduct();
     }, [])
 
@@ -20,7 +19,8 @@ const ProductList = (props) => {
             )
         })
     }
-    if(props.state.length === 0) {
+    if(!props.state) {
+        
         return <div>Loading</div>
     }
     return (
@@ -31,6 +31,6 @@ const ProductList = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return {state: state.productState};
+    return {state: state.productListState};
 }
 export default connect(mapStateToProps, { getAllProducts })(ProductList);

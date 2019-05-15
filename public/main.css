@@ -1,3 +1,7 @@
+body {
+    font-family: 'Inconsolata', monospace !important; 
+}
+
 .userForm {
     max-width: 40vw;
     margin: 0 auto;
@@ -10,9 +14,56 @@
 
 .addShadow {
     transition: box-shadow .5s;
+    position: relative;
 }
 
 .addShadow:hover {
     box-shadow: 1px 1px 14px 0px #888888;
+    
 }
 
+.addShadow:hover .card-bottom {
+    background: #d9e9e678;
+}
+
+.addShadow:hover .shoping-cart::before {
+    font-size: 0.6em;
+    opacity: 1;
+}
+
+.card-bottom {
+    padding: 10px;
+    font-weight: 500;
+    transition: background .5s;
+}
+
+.card-bottom span {
+    font-size: 14px;
+}
+
+.shoping-cart::before {
+    float: right;
+    color: #ffc107;
+    cursor: pointer;
+    font-size: 0;
+    opacity: 0;
+    transition: font-size 0.5s, opacity .5s;
+    position: absolute;
+    right: 5%;
+    bottom: 17%;
+}
+
+.product-title {
+    font-family: 'Stylish', sans-serif;
+    color: #ffc107;
+    margin: 0 auto;
+}
+
+.navBrand {
+    font-family: 'Work Sans', sans-serif;
+    color: chocolate !important;
+}
+
+.brand-link {
+    text-decoration: none !important;
+}

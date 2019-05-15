@@ -5,6 +5,7 @@ import history from "../history";
 import NavBar from "./navbar";
 import UserForm from "./userForm";
 import ProductList from './productList';
+import ProductDetail from './produceDetail';
 
 const App = props => {
   return (
@@ -13,7 +14,8 @@ const App = props => {
         <NavBar />
         <Switch>
           <Route path="/" exact component={UserForm} />
-          <Route path="/:userid/productlist" component={ProductList} />
+          <Route path="/productlist" component={ProductList} />
+          <Route path="/detail/:productid" exact component={ProductDetail} />
 
         </Switch>
       </Router>

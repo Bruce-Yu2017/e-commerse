@@ -1,9 +1,8 @@
-import { GET_ALL_PRODUCTS } from "../actions/types";
+import { GET_ONE_PRODUCT } from "../actions/types";
 
-const initialState = [];
-export default (state = initialState, action) => {
+export default (state = null, action) => {
   switch (action.type) {
-    case GET_ALL_PRODUCTS:
+    case GET_ONE_PRODUCT:
       return action.payload;
     default:
       return state;

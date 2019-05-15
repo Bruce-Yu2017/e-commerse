@@ -9,6 +9,11 @@
       "id": "358aa010-7223-11e9-8525-4d363def472e",
       "email": "370345713@qq.com",
       "password": "123"
+    },
+    {
+      "id": "e34c2970-74db-11e9-9bbc-9f08cd381d0d",
+      "email": "i@g.com",
+      "password": "1"
     }
   ],
   "products": [

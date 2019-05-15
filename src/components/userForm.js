@@ -148,7 +148,7 @@ const UserForm = props => {
 };
 
 const mapStateToProps = (state) => {
-  return state.useState;
+  return state.userState;
 }
 
 export default connect(mapStateToProps, {register, initUserState, login})(UserForm);
