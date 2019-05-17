@@ -67,3 +67,11 @@ body {
 .brand-link {
     text-decoration: none !important;
 }
+
+.modal-img {
+    width: 10vw;
+}
+
+.product-title-in-modal {
+    color: chocolate;
+}

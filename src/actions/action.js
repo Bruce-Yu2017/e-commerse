@@ -1,4 +1,4 @@
-import { REGISTER, CHECK_VALID_USER, INIT_USER_STATE, LOGIN, GET_ALL_PRODUCTS, GET_ONE_PRODUCT } from "./types";
+import { REGISTER, CHECK_VALID_USER, INIT_USER_STATE, LOGIN, GET_ALL_PRODUCTS, GET_ONE_PRODUCT, GET_BUYER_INFO, UPDATE_CART } from "./types";
 import history from '../history';
 import axios from "axios";
 
@@ -106,6 +106,24 @@ export const getOneProduct = (id) => dispatch => {
   axios.get(`http://localhost:3004/products/${id}`).then((res) => {
     dispatch({
       type: GET_ONE_PRODUCT,
+      payload: res.data
+    })
+  })
+}
+
+export const getBuyerInfo = (buyerId) => dispatch => {
+  axios.get(`http://localhost:3004/users/${buyerId}`).then((res) => {
+    dispatch({
+      type: GET_BUYER_INFO,
+      payload: res.data
+    })
+  })
+}
+
+export const updateCart = (buyerId, cartState) => dispatch => {
+  axios.patch(`http://localhost:3004/users/${buyerId}`, {cart: cartState}).then((res) => {
+    dispatch({
+      type: UPDATE_CART,
       payload: res.data
     })
   })

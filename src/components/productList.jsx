@@ -1,25 +1,31 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAllProducts } from '../actions/action'
+import { getAllProducts, getBuyerInfo } from '../actions/action'
 import ProductItem from './productItem';
 
 const ProductList = (props) => {
+    const user = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
         getProduct();
+        getBuyerInfo(user.id);
     }, [])
 
     const getProduct = () => {
         props.getAllProducts();
     }
 
+    const getBuyerInfo = (id) => {
+        props.getBuyerInfo(id)
+    }
+
     const renderLists = () => {
-        return props.state.map((item, index) => {
+        return props.productListState.map((item, index) => {
             return (
                 <ProductItem productInfo={item} key={item.id}/>
             )
         })
     }
-    if(!props.state) {
+    if(!props.productListState) {
         
         return <div>Loading</div>
     }
@@ -31,6 +37,9 @@ const ProductList = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return {state: state.productListState};
+    return {
+        productListState: state.productListState,
+        buyerState: state.buyerState
+    };
 }
-export default connect(mapStateToProps, { getAllProducts })(ProductList);
+export default connect(mapStateToProps, { getAllProducts, getBuyerInfo })(ProductList);
