@@ -6,8 +6,15 @@ import ProductItem from './productItem';
 const ProductList = (props) => {
     const user = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
-        getProduct();
-        getBuyerInfo(user.id);
+        if(props.productListState.length === 0) {
+            getProduct();
+        }
+    }, [])
+
+    useEffect(() => {
+        if(!props.buyerState.id) {
+            getBuyerInfo(user.id);
+        }
     }, [])
 
     const getProduct = () => {

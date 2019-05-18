@@ -1,35 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getOneProduct } from "../actions/action";
+import { getOneProduct, getBuyerInfo } from "../actions/action";
 import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from 'react-bootstrap/FormControl'
-import { Link } from 'react-router-dom';
-
+import FormControl from "react-bootstrap/FormControl";
+import { Link } from "react-router-dom";
 
 const ProductDetail = props => {
-  const [totalPrice, setTotalPrice] = useState(null)
+  const [totalPrice, setTotalPrice] = useState(null);
   const { productid } = props.match.params;
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     getPorductDetail(productid);
-    
   }, []);
 
   useEffect(() => {
-    if(props && props.detail) {
-      setTotalPrice(props.detail.price)
+    if (props && props.detail) {
+      setTotalPrice(props.detail.price);
     }
-  }, [props])
+  }, [props]);
+
+  useEffect(() => {
+    if (!props.buyerState.id) {
+      getBuyerInfo(user.id);
+    }
+  }, []);
+
+  const getBuyerInfo = id => {
+    props.getBuyerInfo(id);
+  };
 
   const [qty, setQty] = useState(1);
-  
-  const qtyOnchange = (val) => {
+  const [cartButton, setCartButton] = useState(false)
+
+  const qtyOnchange = val => {
     setQty(val);
     setTotalPrice(val * props.detail.price);
-  }
+    let cart = {...props.buyerState.cart};
+    if(cart[productid] !== undefined) {
+      let originalQty = cart[productid].qty;
+      val !== originalQty ? setCartButton(true) : setCartButton(false);
+    }
+     
+  };
 
   const getPorductDetail = id => {
     props.getOneProduct(id);
   };
+
+  const isinCart = () => {
+    if(props.buyerState.id) {
+      let cart = {...props.buyerState.cart};
+      return cart[productid] !== undefined;
+    }
+  }
 
   const renderProduct = () => {
     const info = props.detail;
@@ -61,17 +84,28 @@ const ProductDetail = props => {
               <InputGroup.Prepend>
                 <InputGroup.Text>Qty</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl type='number' min={1} value={qty} onChange={(e) => {qtyOnchange(e.target.value)}} />
+              <FormControl
+                type="number"
+                min={0}
+                value={qty}
+                onChange={e => {
+                  qtyOnchange(e.target.value);
+                }}
+              />
             </InputGroup>
-            <p><b>Description</b>: {info.info}</p>
+            <p>
+              <b>Description</b>: {info.info}
+            </p>
             <div>
-              <Link to='/productlist'>
-                <button className='btn btn-lg btn-primary'>
-                  <i className="fas fa-arrow-left mr-1"></i>
-                Go Back</button>
+              <Link to="/productlist">
+                <button className="btn btn-lg btn-primary">
+                  <i className="fas fa-arrow-left mr-1" />
+                  Go Back
+                </button>
               </Link>
-              <button className='btn btn-lg btn-warning ml-3'>
-                Add To Cart
+              <button className="btn btn-lg btn-warning ml-3">
+                {cartButton && <>Update Cart</>}
+                {!cartButton && <>Add To Cart</>}
                 <i className="fas fa-cart-plus " />
               </button>
             </div>
@@ -85,10 +119,13 @@ const ProductDetail = props => {
 };
 
 const mapStateToProps = state => {
-  return { detail: state.productState };
+  return {
+    detail: state.productState,
+    buyerState: state.buyerState
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { getOneProduct }
+  { getOneProduct, getBuyerInfo }
 )(ProductDetail);

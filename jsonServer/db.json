@@ -5,8 +5,18 @@
       "email": "i@g.com",
       "password": "1",
       "cart": {
-        "1": 1,
-        "2": 1
+        "1": {
+          "name": "Google Pixel - Black",
+          "qty": 1,
+          "img": "img/product-1.png",
+          "price": 10
+        },
+        "2": {
+          "name": "Samsung S7",
+          "qty": 1,
+          "img": "img/product-2.png",
+          "price": 16
+        }
       }
     }
   ],

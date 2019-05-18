@@ -14,19 +14,18 @@ const ProductItem = props => {
 
   const saveToCart = (productId) => {
     let buyer = props.buyerState;
-    console.log('buyer: ', buyer);
     if(buyer.cart) {
       if(buyer.cart[productId]) {
         setCartState('already_in_cart');
       }
       else {
-        let updatedCart = {...buyer.cart, ...{[productId]: 1}};
+        let updatedCart = {...buyer.cart, ...{[productId]: {name: title, qty: 1, img: img, price: price}}};
         props.updateCart(user.id, updatedCart);
         setCartState('new_added');
       }
     }
     else {
-      let updatedCart = {[productId]:1};
+      let updatedCart = {[productId]:{name: title, qty: 1, img: img, price: price}};
       props.updateCart(user.id, updatedCart);
       setCartState('new_added');
     }
@@ -88,7 +87,9 @@ const ProductItem = props => {
 };
 
 const mapStateToProps = (state) => {
-  return {buyerState: state.buyerState};
+  return {
+    buyerState: state.buyerState
+  };
 }
 
 export default connect(mapStateToProps, { getBuyerInfo, updateCart })(ProductItem);
