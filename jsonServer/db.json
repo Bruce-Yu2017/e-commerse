@@ -5,17 +5,17 @@
       "email": "i@g.com",
       "password": "1",
       "cart": {
-        "1": {
-          "name": "Google Pixel - Black",
+        "3": {
+          "name": "HTC 10 - Black",
           "qty": 1,
-          "img": "img/product-1.png",
-          "price": 10
+          "img": "img/product-3.png",
+          "price": 8
         },
-        "2": {
-          "name": "Samsung S7",
+        "4": {
+          "name": "HTC 10 - White",
           "qty": 1,
-          "img": "img/product-2.png",
-          "price": 16
+          "img": "img/product-4.png",
+          "price": 18
         }
       }
     }

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getOneProduct, getBuyerInfo } from "../actions/action";
+import { getOneProduct, getBuyerInfo, updateCart } from "../actions/action";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
+import history from '../history';
 
 const ProductDetail = props => {
   const [totalPrice, setTotalPrice] = useState(null);
@@ -47,10 +48,21 @@ const ProductDetail = props => {
     props.getOneProduct(id);
   };
 
-  const isinCart = () => {
-    if(props.buyerState.id) {
-      let cart = {...props.buyerState.cart};
-      return cart[productid] !== undefined;
+  const addToCart = () => {
+    let cart = JSON.parse(JSON.stringify(props.buyerState.cart));
+    if(cart[productid]) {
+      if(cart[productid].qty === qty) {
+        history.push(`/productlist`);
+      }
+      else {
+        cart[productid].qty = parseInt(qty);
+        props.updateCart(user.id, cart, `/productlist`)
+      }
+    }
+    else {
+      let obj = {name: props.detail.title, qty: parseInt(qty), img: props.detail.img, price: props.detail.price};
+      cart[productid] = obj;
+      props.updateCart(user.id, cart, `/productlist`);
     }
   }
 
@@ -103,7 +115,7 @@ const ProductDetail = props => {
                   Go Back
                 </button>
               </Link>
-              <button className="btn btn-lg btn-warning ml-3">
+              <button className="btn btn-lg btn-warning ml-3" onClick={() => addToCart()}>
                 {cartButton && <>Update Cart</>}
                 {!cartButton && <>Add To Cart</>}
                 <i className="fas fa-cart-plus " />
@@ -127,5 +139,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getOneProduct, getBuyerInfo }
+  { getOneProduct, getBuyerInfo, updateCart }
 )(ProductDetail);

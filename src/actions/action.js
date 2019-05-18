@@ -120,11 +120,14 @@ export const getBuyerInfo = (buyerId) => dispatch => {
   })
 }
 
-export const updateCart = (buyerId, cartState) => dispatch => {
+export const updateCart = (buyerId, cartState, url=null) => dispatch => {
   axios.patch(`http://localhost:3004/users/${buyerId}`, {cart: cartState}).then((res) => {
     dispatch({
       type: UPDATE_CART,
       payload: res.data
     })
+    if(url) {
+      history.push(url);
+    }
   })
 }
