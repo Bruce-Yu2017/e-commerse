@@ -4,7 +4,7 @@ import { getAllProducts, getBuyerInfo } from '../actions/action'
 import ProductItem from './productItem';
 
 const ProductList = (props) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
     useEffect(() => {
         if(props.productListState.length === 0) {
             getProduct();
@@ -37,7 +37,7 @@ const ProductList = (props) => {
         return <div>Loading</div>
     }
     return (
-        <div className='row py-5 mx-auto'>
+        <div className='row py-5 mx-auto marginToNavBar container'>
             {renderLists()}
         </div>
     )

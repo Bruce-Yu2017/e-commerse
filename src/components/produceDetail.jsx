@@ -4,12 +4,12 @@ import { getOneProduct, getBuyerInfo, updateCart } from "../actions/action";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
-import history from '../history';
+import history from "../history";
 
 const ProductDetail = props => {
   const [totalPrice, setTotalPrice] = useState(null);
   const { productid } = props.match.params;
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
   useEffect(() => {
     getPorductDetail(productid);
   }, []);
@@ -31,17 +31,16 @@ const ProductDetail = props => {
   };
 
   const [qty, setQty] = useState(1);
-  const [cartButton, setCartButton] = useState(false)
+  const [cartButton, setCartButton] = useState(false);
 
   const qtyOnchange = val => {
     setQty(val);
     setTotalPrice(val * props.detail.price);
-    let cart = {...props.buyerState.cart};
-    if(cart[productid] !== undefined) {
+    let cart = { ...props.buyerState.cart };
+    if (cart[productid] !== undefined) {
       let originalQty = cart[productid].qty;
       val !== originalQty ? setCartButton(true) : setCartButton(false);
     }
-     
   };
 
   const getPorductDetail = id => {
@@ -50,21 +49,24 @@ const ProductDetail = props => {
 
   const addToCart = () => {
     let cart = JSON.parse(JSON.stringify(props.buyerState.cart));
-    if(cart[productid]) {
-      if(cart[productid].qty === qty) {
+    if (cart[productid]) {
+      if (cart[productid].qty === qty) {
         history.push(`/productlist`);
-      }
-      else {
+      } else {
         cart[productid].qty = parseInt(qty);
-        props.updateCart(user.id, cart, `/productlist`)
+        props.updateCart(user.id, cart, `/productlist`);
       }
-    }
-    else {
-      let obj = {name: props.detail.title, qty: parseInt(qty), img: props.detail.img, price: props.detail.price};
+    } else {
+      let obj = {
+        name: props.detail.title,
+        qty: parseInt(qty),
+        img: props.detail.img,
+        price: props.detail.price
+      };
       cart[productid] = obj;
       props.updateCart(user.id, cart, `/productlist`);
     }
-  }
+  };
 
   const renderProduct = () => {
     const info = props.detail;
@@ -76,7 +78,7 @@ const ProductDetail = props => {
       );
     }
     return (
-      <>
+      <div className="container marginToNavBar">
         <div className="row">
           <h1 className="product-title">{info.title}</h1>
         </div>
@@ -115,15 +117,20 @@ const ProductDetail = props => {
                   Go Back
                 </button>
               </Link>
-              <button className="btn btn-lg btn-warning ml-3" onClick={() => addToCart()}>
-                {cartButton && <>Update Cart</>}
-                {!cartButton && <>Add To Cart</>}
-                <i className="fas fa-cart-plus " />
-              </button>
+              <Link to="/cart">
+                <button
+                  className="btn btn-lg btn-warning ml-3"
+                  onClick={() => addToCart()}
+                >
+                  {cartButton && <>Update Cart</>}
+                  {!cartButton && <>Add To Cart</>}
+                  <i className="fas fa-cart-plus " />
+                </button>
+              </Link>
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   };
 

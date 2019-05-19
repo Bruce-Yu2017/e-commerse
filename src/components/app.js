@@ -6,16 +6,18 @@ import NavBar from "./navbar";
 import UserForm from "./userForm";
 import ProductList from './productList';
 import ProductDetail from './produceDetail';
+import Cart from './cart';
 
 const App = props => {
   return (
-    <div className="container">
+    <div>
       <Router history={history}>
         <NavBar />
         <Switch>
           <Route path="/" exact component={UserForm} />
           <Route path="/productlist" component={ProductList} />
-          <Route path="/detail/:productid" exact component={ProductDetail} />
+          <Route path="/detail/:productid" component={ProductDetail} />
+          <Route path="/cart" exact component={Cart} />
 
         </Switch>
       </Router>

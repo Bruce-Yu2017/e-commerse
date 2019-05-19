@@ -75,3 +75,71 @@ body {
 .product-title-in-modal {
     color: chocolate;
 }
+
+.cart-in-navbar {
+    cursor: pointer;
+    color: #ffc107;
+}
+
+.cart-title {
+    text-align: center;
+}
+
+.cart-title h1 {
+    color: cornflowerblue;
+}
+.cart-spiner {
+    width: 5rem !important;
+    height: 5rem !important;
+}
+
+.cartHeader {
+    text-align: center;
+    font-weight: bolder;
+}
+.cartHeader h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.cart-table-cell {
+    align-items: center;
+    display: grid;
+    text-align: center;
+}
+.cart-table-cell i {
+    cursor: pointer;
+}
+
+.small-img {
+    width: 50%;
+    height: auto;
+}
+
+.delete-product-name {
+    color: chocolate;
+}
+
+.delete-icon {
+    color: #ffc107;
+    transition: color 0.3s;
+}
+
+.delete-icon:hover {
+    color: #e93d12;
+}
+
+.tableBody {
+    max-height: 70vh;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+
+.marginToNavBar {
+    margin-top: 75px;
+}
+
+.sub-total-box {
+    width: 18vw;
+    padding: 15px;
+    text-align: right;
+}

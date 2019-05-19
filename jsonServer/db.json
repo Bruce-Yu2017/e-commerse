@@ -5,6 +5,18 @@
       "email": "i@g.com",
       "password": "1",
       "cart": {
+        "1": {
+          "name": "Google Pixel - Black",
+          "qty": 1,
+          "img": "img/product-1.png",
+          "price": 10
+        },
+        "2": {
+          "name": "Samsung S7",
+          "qty": 1,
+          "img": "img/product-2.png",
+          "price": 16
+        },
         "3": {
           "name": "HTC 10 - Black",
           "qty": 1,
@@ -16,6 +28,30 @@
           "qty": 1,
           "img": "img/product-4.png",
           "price": 18
+        },
+        "5": {
+          "name": "HTC Desire 626s",
+          "qty": 1,
+          "img": "img/product-5.png",
+          "price": 24
+        },
+        "6": {
+          "name": "Vintage Iphone",
+          "qty": 1,
+          "img": "img/product-6.png",
+          "price": 17
+        },
+        "7": {
+          "name": "Iphone 7",
+          "qty": 1,
+          "img": "img/product-7.png",
+          "price": 30
+        },
+        "8": {
+          "name": "Smashed Iphone",
+          "qty": 1,
+          "img": "img/product-8.png",
+          "price": 2
         }
       }
     }

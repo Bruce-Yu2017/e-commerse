@@ -38,7 +38,7 @@ export const login = data => dispatch => {
           type: "login"
         }
       });
-      localStorage.setItem("user", JSON.stringify(foundUser));
+      sessionStorage.setItem("user", JSON.stringify(foundUser));
       history.push(`/productlist`);
     }
   })
@@ -74,7 +74,7 @@ export const register = data => dispatch => {
             type: "register"
           }
         });
-        localStorage.setItem("user", JSON.stringify(res.data));
+        sessionStorage.setItem("user", JSON.stringify(res.data));
         history.push(`/productlist`);
       });
     }

@@ -16,8 +16,8 @@ const NavBar = props => {
   });
 
   const getUser = () => {
-    if (localStorage.getItem("user")) {
-      let user = JSON.parse(localStorage.getItem("user"));
+    if (sessionStorage.getItem("user")) {
+      let user = JSON.parse(sessionStorage.getItem("user"));
       setUser(user.email.slice(0, user.email.indexOf("@")));
     } else {
       history.push("/");
@@ -25,8 +25,8 @@ const NavBar = props => {
   };
 
   const logout = () => {
-    props.userState.initUserState();
-    localStorage.clear();
+    props.initUserState();
+    sessionStorage.clear();
     setUser("");
     history.push("/");
   };
@@ -34,8 +34,8 @@ const NavBar = props => {
   const iconPopoverComponent = () => {
     let itemNum = props.buyerState.cart ? Object.keys(props.buyerState.cart).length : 0;
     return (
-      <Popover id="popover-basic" title="Shopping Cart Info:">
-        You have {itemNum} {itemNum > 1 ? "items" : "item"} in your shopping cart.
+      <Popover id="popover-basic" title="Cart Info:">
+        You have {itemNum} {itemNum > 1 ? "items" : "item"} in cart.
       </Popover>
     );
   };
@@ -45,14 +45,14 @@ const NavBar = props => {
   }
 
   return (
-    <div>
-      <Navbar bg="light" variant="light">
-        {!localStorage.getItem("user") && (
+    <div className='top-nav-bar'>
+      <Navbar bg="light" variant="light" fixed="top">
+        {!sessionStorage.getItem("user") && (
           <Navbar.Brand className="mr-auto navBrand">
             <Link to="/">Bruce's Market</Link>
           </Navbar.Brand>
         )}
-        {localStorage.getItem("user") && (
+        {sessionStorage.getItem("user") && (
           <Navbar.Brand className="mr-auto navBrand">
             <Link to="/productlist" className="brand-link">
               Bruce's Market
@@ -62,7 +62,7 @@ const NavBar = props => {
         {user.length === 0 && <span className="mr-sm-2">Welcome</span>}
         {user.length > 0 && (
           <span className="mr-sm-2">
-            <i className="fas fa fa-cart-plus mr-2" id="cart" onMouseEnter={() => togglePopover()} onMouseLeave={() => togglePopover()}/>
+            <Link to='/cart'><i className="fas fa fa-cart-plus mr-2 cart-in-navbar" id="cart" onMouseEnter={() => togglePopover()} onMouseLeave={() => togglePopover()}/></Link>
             <Overlay
               show={popoverState}
               target={document.getElementById("cart")}
