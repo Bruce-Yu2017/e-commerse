@@ -45,7 +45,7 @@ const NavBar = props => {
   }
 
   return (
-    <div className='top-nav-bar'>
+    <div className='top-nav-bar marginToNavBar'>
       <Navbar bg="light" variant="light" fixed="top">
         {!sessionStorage.getItem("user") && (
           <Navbar.Brand className="mr-auto navBrand">

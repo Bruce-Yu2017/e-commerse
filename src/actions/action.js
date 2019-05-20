@@ -121,6 +121,7 @@ export const getBuyerInfo = (buyerId) => dispatch => {
 }
 
 export const updateCart = (buyerId, cartState, url=null) => dispatch => {
+  console.log('buyerId, cartState: ', buyerId, cartState);
   axios.patch(`http://localhost:3004/users/${buyerId}`, {cart: cartState}).then((res) => {
     dispatch({
       type: UPDATE_CART,

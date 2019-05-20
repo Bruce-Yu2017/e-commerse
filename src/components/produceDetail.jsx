@@ -48,23 +48,40 @@ const ProductDetail = props => {
   };
 
   const addToCart = () => {
-    let cart = JSON.parse(JSON.stringify(props.buyerState.cart));
-    if (cart[productid]) {
-      if (cart[productid].qty === qty) {
-        history.push(`/productlist`);
+    let buyer = JSON.parse(JSON.stringify(props.buyerState));
+    if (buyer.cart) {
+      if (buyer.cart[productid]) {
+        if (buyer.cart[productid].qty === qty) {
+          console.log('buyer["cart"]: ', buyer.cart);
+          history.push("/productlist");
+        } else {
+          buyer.cart[productid].qty = parseInt(qty);
+          props.updateCart(user.id, buyer.cart, "/productlist");
+        }
       } else {
-        cart[productid].qty = parseInt(qty);
-        props.updateCart(user.id, cart, `/productlist`);
+        let updatedCart = {
+          ...buyer.cart,
+          ...{
+            [productid]: {
+              name: props.detail.title,
+              qty: parseInt(qty),
+              img: props.detail.img,
+              price: props.detail.price
+            }
+          }
+        };
+        props.updateCart(user.id, updatedCart, "/productlist");
       }
     } else {
       let obj = {
-        name: props.detail.title,
-        qty: parseInt(qty),
-        img: props.detail.img,
-        price: props.detail.price
+        [productid]: {
+          name: props.detail.title,
+          qty: parseInt(qty),
+          img: props.detail.img,
+          price: props.detail.price
+        }
       };
-      cart[productid] = obj;
-      props.updateCart(user.id, cart, `/productlist`);
+      props.updateCart(user.id, obj, "/productlist");
     }
   };
 

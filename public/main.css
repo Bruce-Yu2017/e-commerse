@@ -131,8 +131,11 @@ body {
 .tableBody {
     max-height: 70vh;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding-right: 10px;
 }
+
+.tableBody::-webkit-scrollbar { width: 0 !important }
 
 .marginToNavBar {
     margin-top: 75px;
@@ -142,4 +145,26 @@ body {
     width: 18vw;
     padding: 15px;
     text-align: right;
+}
+
+.paypal-icon {
+    vertical-align: middle;
+}
+
+.foot {
+    border-top: 1px #dee2e6 solid;
+    padding: 10px;
+}
+
+.foot .bottom {
+    float: right;
+}
+
+.bottom h5 {
+    text-align: right;
+}
+
+.cancel-alert {
+    text-align: center;
+    width: 100%;
 }
