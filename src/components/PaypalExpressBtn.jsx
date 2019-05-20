@@ -33,7 +33,7 @@ const PaypalBtn = props => {
   // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
 
   const client = {
-    sandbox: "ARAtMVjdveYj52bfxhvtu8sQSK2NCdHzlqd8xqT3FfXygvUrh6DmdrHPni9r6uFhpr4p-N8dC3kUhtgy",
+    sandbox: "",
     production: "YOUR-PRODUCTION-APP-ID"
   };
   return (
